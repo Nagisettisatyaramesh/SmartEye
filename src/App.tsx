@@ -1,8 +1,8 @@
-import { Outlet } from 'react-router-dom'
 import { MotionConfig } from 'framer-motion'
 import { Header } from '@/components/layout/Header'
 import { Footer } from '@/components/layout/Footer'
 import { ScrollManager } from '@/components/layout/ScrollManager'
+import { PageTransition } from '@/components/layout/PageTransition'
 
 export function App() {
   return (
@@ -17,7 +17,7 @@ export function App() {
         <ScrollManager />
         <Header />
         <main id="main-content" className="flex-1">
-          <Outlet />
+          <PageTransition />
         </main>
         <Footer />
       </div>

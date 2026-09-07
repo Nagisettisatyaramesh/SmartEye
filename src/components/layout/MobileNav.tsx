@@ -1,6 +1,6 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { ChevronDown, X } from 'lucide-react'
+import { useState, type FormEvent } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { ChevronDown, Search, X } from 'lucide-react'
 import clsx from 'clsx'
 import { primaryNav } from '@/data/nav'
 import { Button } from '@/components/ui/Button'
@@ -8,6 +8,16 @@ import { motion, AnimatePresence } from 'framer-motion'
 
 export function MobileNav({ open, onClose }: { open: boolean; onClose: () => void }) {
   const [expanded, setExpanded] = useState<string | null>(null)
+  const [query, setQuery] = useState('')
+  const navigate = useNavigate()
+
+  function handleSearch(e: FormEvent) {
+    e.preventDefault()
+    const q = query.trim()
+    navigate(q ? `/resources/?s=${encodeURIComponent(q)}` : '/resources/')
+    onClose()
+    setQuery('')
+  }
 
   return (
     <AnimatePresence>
@@ -37,6 +47,17 @@ export function MobileNav({ open, onClose }: { open: boolean; onClose: () => voi
                 <X className="h-5 w-5" />
               </button>
             </div>
+            <form onSubmit={handleSearch} className="flex items-center gap-2 border-b border-neutral-100 px-5 py-4">
+              <Search className="h-4 w-4 flex-shrink-0 text-neutral-400" />
+              <input
+                type="search"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Enter your search"
+                aria-label="Search the site"
+                className="w-full bg-transparent text-sm text-ink-900 placeholder:text-neutral-400 focus:outline-none"
+              />
+            </form>
             <nav className="flex-1 overflow-y-auto p-5">
               <ul className="space-y-1">
                 {primaryNav.map((item) => {

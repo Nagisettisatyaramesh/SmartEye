@@ -5,6 +5,7 @@ import {
 } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { TiltCard } from '@/components/ui/TiltCard'
 import { modules, type ModuleItem } from '@/data/modules'
 
 const icons: Record<ModuleItem['icon'], typeof ListChecks> = {
@@ -32,17 +33,18 @@ export function PlatformOverview() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: (i % 4) * 0.07 }}
-                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-elevated"
               >
-                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                <div className="relative flex items-start justify-between">
-                  <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
-                    <Icon className="h-5 w-5" />
+                <TiltCard className="overflow-hidden rounded-2xl border border-neutral-200 bg-white p-6 shadow-soft transition-[border-color,box-shadow] duration-300 hover:border-brand-300 hover:shadow-elevated">
+                  <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-brand-50 opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+                  <div className="relative flex items-start justify-between">
+                    <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-brand-50 text-brand-700 transition-colors duration-300 group-hover:bg-brand-600 group-hover:text-white">
+                      <Icon className="h-5 w-5" />
+                    </div>
+                    <ArrowUpRight className="h-4 w-4 text-neutral-300 opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100 group-hover:text-brand-600" />
                   </div>
-                  <ArrowUpRight className="h-4 w-4 text-neutral-300 opacity-0 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:translate-x-0.5 group-hover:opacity-100 group-hover:text-brand-600" />
-                </div>
-                <h3 className="relative mt-4 font-bold text-ink-900">{mod.title}</h3>
-                <p className="relative mt-2 text-sm leading-relaxed text-neutral-600">{mod.description}</p>
+                  <h3 className="relative mt-4 font-bold text-ink-900">{mod.title}</h3>
+                  <p className="relative mt-2 text-sm leading-relaxed text-neutral-600">{mod.description}</p>
+                </TiltCard>
               </motion.div>
             )
           })}

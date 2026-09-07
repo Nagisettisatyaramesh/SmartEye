@@ -1,12 +1,20 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { ArrowRight, Calendar, PlayCircle } from 'lucide-react'
+import { Link, useSearchParams } from 'react-router-dom'
+import { ArrowRight, Calendar } from 'lucide-react'
 import { SEO } from '@/components/ui/SEO'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { VideoCard } from '@/components/ui/VideoCard'
 import { articles } from '@/data/resources'
+import { videos } from '@/data/videos'
 
 export function ResourcesPage() {
+  const [searchParams] = useSearchParams()
+  const query = searchParams.get('s')?.trim() ?? ''
+  const filteredArticles = query
+    ? articles.filter((a) => `${a.title} ${a.excerpt} ${a.category}`.toLowerCase().includes(query.toLowerCase()))
+    : articles
+
   return (
     <>
       <SEO
@@ -29,9 +37,19 @@ export function ResourcesPage() {
 
       <section className="bg-white py-20 sm:py-24">
         <Container>
-          <SectionHeading eyebrow="Blogs" title="Everyone has their own way of learning" />
+          {query ? (
+            <SectionHeading
+              eyebrow="Search Results"
+              title={`Results for "${query}"`}
+              description={
+                filteredArticles.length === 0 ? 'No articles matched your search — try a different term.' : undefined
+              }
+            />
+          ) : (
+            <SectionHeading eyebrow="Blogs" title="Everyone has their own way of learning" />
+          )}
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {articles.map((article, i) => (
+            {filteredArticles.map((article, i) => (
               <motion.div
                 key={article.slug}
                 initial={{ opacity: 0, y: 20 }}
@@ -72,21 +90,26 @@ export function ResourcesPage() {
       </section>
 
       <section className="border-t border-neutral-100 bg-neutral-50 py-20 sm:py-24">
-        <Container className="max-w-3xl text-center">
+        <Container>
           <SectionHeading
             align="center"
             eyebrow="Videos and Media"
             title="Watch SmartEye eQMS in action"
             description="Everyone has their own way of learning. S-Cube's resources help you learn more."
           />
-          <a
-            href="https://youtu.be/YjVfsjdiYAY"
-            target="_blank"
-            rel="noreferrer noopener"
-            className="mx-auto mt-8 flex aspect-video max-w-xl items-center justify-center rounded-2xl border border-neutral-200 bg-ink-950 shadow-soft"
-          >
-            <PlayCircle className="h-14 w-14 text-white/80 transition-transform hover:scale-110" />
-          </a>
+          <div className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
+            {videos.map((video, i) => (
+              <motion.div
+                key={video.youtubeId}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-60px' }}
+                transition={{ duration: 0.45, delay: (i % 2) * 0.1 }}
+              >
+                <VideoCard video={video} />
+              </motion.div>
+            ))}
+          </div>
         </Container>
       </section>
     </>

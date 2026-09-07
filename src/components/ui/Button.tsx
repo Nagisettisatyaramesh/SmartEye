@@ -27,6 +27,8 @@ type CommonProps = {
   icon?: ReactNode
   children: ReactNode
   className?: string
+  /** Adds a subtle, continuous glow-pulse ring — use sparingly, on the one primary CTA per view. */
+  glow?: boolean
 }
 
 type ButtonAsButton = CommonProps &
@@ -36,8 +38,8 @@ type ButtonAsLink = CommonProps &
   AnchorHTMLAttributes<HTMLAnchorElement> & { href: string }
 
 export function Button(props: ButtonAsButton | ButtonAsLink) {
-  const { variant = 'primary', size = 'md', icon, children, className, ...rest } = props
-  const classes = clsx(base, variants[variant], sizes[size], className)
+  const { variant = 'primary', size = 'md', icon, children, className, glow, ...rest } = props
+  const classes = clsx(base, variants[variant], sizes[size], glow && 'animate-glow-pulse', className)
 
   if ('href' in props && props.href) {
     const isExternal = /^https?:\/\//.test(props.href) || props.href.startsWith('mailto:')

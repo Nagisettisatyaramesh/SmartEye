@@ -56,6 +56,11 @@
   --animate-float-slow: float 11s ease-in-out infinite;
   --animate-marquee: marquee 32s linear infinite;
   --animate-draw: draw 1.4s ease forwards;
+  --animate-aurora-1: aurora-1 16s ease-in-out infinite;
+  --animate-aurora-2: aurora-2 19s ease-in-out infinite;
+  --animate-aurora-3: aurora-3 22s ease-in-out infinite;
+  --animate-glow-pulse: glow-pulse 2.8s ease-in-out infinite;
+  --animate-shimmer: shimmer 3.2s linear infinite;
 
   @keyframes fade-up {
     from { opacity: 0; transform: translateY(24px); }
@@ -76,6 +81,28 @@
   @keyframes draw {
     from { stroke-dashoffset: var(--dash, 400); }
     to { stroke-dashoffset: 0; }
+  }
+  @keyframes aurora-1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(6%, 10%) scale(1.15); }
+    66% { transform: translate(-8%, 4%) scale(0.9); }
+  }
+  @keyframes aurora-2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-10%, -8%) scale(1.2); }
+  }
+  @keyframes aurora-3 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    40% { transform: translate(8%, -10%) scale(1.1); }
+    75% { transform: translate(-6%, 6%) scale(0.92); }
+  }
+  @keyframes glow-pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgb(41 96 214 / 0.45); }
+    50% { box-shadow: 0 0 0 10px rgb(41 96 214 / 0); }
+  }
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
   }
 }
 

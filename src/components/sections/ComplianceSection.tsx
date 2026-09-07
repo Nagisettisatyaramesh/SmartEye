@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { TiltCard } from '@/components/ui/TiltCard'
 import { standards } from '@/data/compliance'
 
 export function ComplianceSection() {
@@ -21,11 +22,12 @@ export function ComplianceSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-60px' }}
               transition={{ duration: 0.45, delay: (i % 4) * 0.06 }}
-              className="rounded-2xl border border-neutral-200 bg-gradient-to-b from-white to-neutral-50 p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-300 hover:shadow-elevated"
             >
-              <p className="font-display text-xl font-extrabold text-brand-700">{s.code}</p>
-              <p className="mt-2 text-sm font-semibold text-ink-900">{s.name}</p>
-              <p className="mt-2 text-sm leading-relaxed text-neutral-600">{s.description}</p>
+              <TiltCard className="rounded-2xl border border-neutral-200 bg-gradient-to-b from-white to-neutral-50 p-6 transition-[border-color,box-shadow] duration-300 hover:border-brand-300 hover:shadow-elevated">
+                <p className="font-display text-xl font-extrabold text-brand-700">{s.code}</p>
+                <p className="mt-2 text-sm font-semibold text-ink-900">{s.name}</p>
+                <p className="mt-2 text-sm leading-relaxed text-neutral-600">{s.description}</p>
+              </TiltCard>
             </motion.div>
           ))}
         </div>

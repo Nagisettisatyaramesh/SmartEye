@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import clsx from 'clsx'
 import { motion } from 'framer-motion'
+import { RevealText } from '@/components/ui/RevealText'
 
 export function SectionHeading({
   eyebrow,
@@ -11,43 +12,47 @@ export function SectionHeading({
   className,
 }: {
   eyebrow?: string
-  title: ReactNode
+  title: string
   description?: ReactNode
   align?: 'left' | 'center'
   light?: boolean
   className?: string
 }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className={clsx('max-w-2xl', align === 'center' && 'mx-auto text-center', className)}
-    >
+    <div className={clsx('max-w-2xl', align === 'center' && 'mx-auto text-center', className)}>
       {eyebrow && (
-        <span
+        <motion.span
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
           className={clsx(
             'mb-4 inline-flex items-center rounded-full border px-3.5 py-1 text-xs font-semibold uppercase tracking-wider',
             light ? 'border-white/20 text-brand-200 bg-white/5' : 'border-brand-200 bg-brand-50 text-brand-700',
           )}
         >
           {eyebrow}
-        </span>
+        </motion.span>
       )}
-      <h2
+      <RevealText
+        as="h2"
+        text={title}
         className={clsx(
           'text-balance text-3xl font-bold leading-[1.15] sm:text-4xl lg:text-[2.75rem]',
           light ? 'text-white' : 'text-ink-900',
         )}
-      >
-        {title}
-      </h2>
+      />
       {description && (
-        <p className={clsx('mt-4 text-lg leading-relaxed', light ? 'text-brand-100/80' : 'text-neutral-600')}>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className={clsx('mt-4 text-lg leading-relaxed', light ? 'text-brand-100/80' : 'text-neutral-600')}
+        >
           {description}
-        </p>
+        </motion.p>
       )}
-    </motion.div>
+    </div>
   )
 }

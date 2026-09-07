@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button'
 import { Logo } from '@/components/layout/Logo'
 import { MegaMenu } from '@/components/layout/MegaMenu'
 import { MobileNav } from '@/components/layout/MobileNav'
+import { SiteSearch } from '@/components/layout/SiteSearch'
 
 export function Header() {
   const [scrolled, setScrolled] = useState(false)
@@ -84,6 +85,9 @@ export function Header() {
             </nav>
 
             <div className="flex items-center gap-2">
+              <div className="hidden md:block">
+                <SiteSearch />
+              </div>
               <Button href="/#demo" size="md" className="hidden sm:inline-flex">
                 Get a Demo
               </Button>

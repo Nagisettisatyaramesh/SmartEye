@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import { Cloud, KeyRound, History, PenTool, ShieldCheck, Workflow } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
+import { TiltCard } from '@/components/ui/TiltCard'
+import { AuroraBackground } from '@/components/ui/AuroraBackground'
 import { securityCards, type SecurityCard } from '@/data/security'
 
 const icons: Record<SecurityCard['icon'], typeof Cloud> = { Cloud, KeyRound, History, PenTool, ShieldCheck, Workflow }
@@ -10,7 +12,7 @@ export function SecuritySection() {
   return (
     <section className="relative overflow-hidden bg-ink-900 py-20 sm:py-28">
       <div className="bg-grid pointer-events-none absolute inset-0 opacity-10" />
-      <div className="pointer-events-none absolute left-1/2 top-0 h-96 w-96 -translate-x-1/2 rounded-full bg-brand-600/20 blur-3xl" />
+      <AuroraBackground />
 
       <Container className="relative">
         <SectionHeading
@@ -30,13 +32,14 @@ export function SecuritySection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.45, delay: (i % 3) * 0.08 }}
-                className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-accent-400/40 hover:bg-white/[0.07]"
               >
-                <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent-400/30 bg-accent-400/10 text-accent-300">
-                  <Icon className="h-5 w-5" />
-                </div>
-                <h3 className="mt-4 font-bold text-white">{card.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-brand-100/70">{card.description}</p>
+                <TiltCard className="rounded-2xl border border-white/10 bg-white/[0.04] p-6 backdrop-blur-sm transition-[border-color,background-color] duration-300 hover:border-accent-400/40 hover:bg-white/[0.07]">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-accent-400/30 bg-accent-400/10 text-accent-300">
+                    <Icon className="h-5 w-5" />
+                  </div>
+                  <h3 className="mt-4 font-bold text-white">{card.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-brand-100/70">{card.description}</p>
+                </TiltCard>
               </motion.div>
             )
           })}
