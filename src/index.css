@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Manrope:wght@500;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Manrope", ui-sans-serif, system-ui, sans-serif;
+
+  /* SmartEye brand palette — deep indigo/blue, own identity (not Greenlight Guru's) */
+  --color-ink-950: #060c1e;
+  --color-ink-900: #0a1330;
+  --color-ink-800: #101c44;
+  --color-ink-700: #172756;
+
+  --color-brand-950: #06133a;
+  --color-brand-900: #0a1e57;
+  --color-brand-800: #0e2b74;
+  --color-brand-700: #123a94;
+  --color-brand-600: #1a4bb8;
+  --color-brand-500: #2960d6;
+  --color-brand-400: #4f80e6;
+  --color-brand-300: #85a8ef;
+  --color-brand-200: #bad0f6;
+  --color-brand-100: #dde8fb;
+  --color-brand-50: #f2f6fd;
+
+  --color-accent-600: #0d9488;
+  --color-accent-500: #14b8a6;
+  --color-accent-400: #2dd4bf;
+  --color-accent-300: #5eead4;
+  --color-accent-200: #99f6e4;
+  --color-accent-100: #ccfbf1;
+  --color-accent-50: #f0fdfa;
+
+  --color-signal-600: #b45309;
+  --color-signal-500: #d97706;
+  --color-signal-100: #fef3c7;
+
+  --color-neutral-950: #0b0e14;
+  --color-neutral-900: #12151d;
+  --color-neutral-800: #1c212e;
+  --color-neutral-700: #333a4a;
+  --color-neutral-600: #4c5568;
+  --color-neutral-500: #6b7385;
+  --color-neutral-400: #94a0b4;
+  --color-neutral-300: #c1c9d6;
+  --color-neutral-200: #dee3ec;
+  --color-neutral-100: #eef1f6;
+  --color-neutral-50: #f7f9fc;
+
+  --shadow-soft: 0 1px 2px 0 rgb(10 20 50 / 0.04), 0 8px 24px -8px rgb(10 30 70 / 0.10);
+  --shadow-elevated: 0 4px 12px -2px rgb(10 20 50 / 0.08), 0 24px 48px -16px rgb(10 30 70 / 0.18);
+
+  --animate-fade-up: fade-up 0.7s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  --animate-fade-in: fade-in 0.6s ease forwards;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-marquee: marquee 32s linear infinite;
+  --animate-draw: draw 1.4s ease forwards;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-14px) rotate(0.5deg); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  @keyframes draw {
+    from { stroke-dashoffset: var(--dash, 400); }
+    to { stroke-dashoffset: 0; }
+  }
+}
+
+@layer base {
+  * {
+    @apply border-neutral-200;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    @apply bg-white text-neutral-800 font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display text-ink-900 tracking-tight;
+  }
+
+  ::selection {
+    @apply bg-accent-100 text-ink-900;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent-500);
+    outline-offset: 2px;
+    border-radius: 4px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer utilities {
+  .container-page {
+    @apply mx-auto w-full max-w-[1280px] px-5 sm:px-8 lg:px-10;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(23 39 86 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(23 39 86 / 0.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
